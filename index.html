@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MeetHalf - Find Your Perfect Midpoint</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+    <!-- header -->
+    <header>
+      <h1>📍 MeetHalf</h1>
+      <p class="tagline">Find the perfect place to meet in the middle</p>
+    </header>
+
+    <!-- Main content -->
+    <main>
+      <!-- Inputs and Controls -->
+      <aside class="sidebar">
+        <div class="input-section">
+          <h2>Enter Locations</h2>
+
+          <div class="input-group">
+            <label for="location-a">📍 Your Location</label>
+            <input type="text" id="location-a" placeholder="123 Main St, Iowa City, IA">
+          </div>
+
+          <div class="input-group">
+            <label for="location-b">📍 Person B's Location</label>
+            <input type="text" id="location-b" placeholder="456 Oak Ave, Cedar Rapids, IA">
+          </div>
+
+          <button class="search-btn">Find Midpoint</button>
+        </div>
+
+        <!-- Search Radius -->
+        <div class="controls-section">
+          <h3>Search Radius</h3>
+          <div class="radius-control">
+            <input type="range" id="radius-slider" min="1" max="10" value="5">
+            <span class="radius-value">5 miles</span>
+          </div>
+        </div>
+
+        <!-- type filter -->
+        <div class="filters-section">
+          <h3>Find Midpoint Options:</h3>
+          <div class="filter-buttons">
+            <button class="filter-btn active">☕ Coffee</button>
+            <button class="filter-btn">🍽️ Restaurant</button>
+            <button class="filter-btn">🌳 Park</button>
+          </div>
+        </div>
+
+        <!-- Suggestions -->
+        <div class="suggestions-section">
+          <h3>Suggested Places</h3>
+          <div class="place-list">
+            <div class="place-card">
+              <h4>Coffee Shop</h4>
+              <p class="place-address">123 Center St</p>
+              <div class="place-info">
+                <span class="rating">⭐ 4.5</span>
+                <span class="distance">2.3 mi</span>
+              </div>
+            </div>
+            <div class="place-card">
+              <h4>Park</h4>
+              <p class="place-address">456 Midway Ave</p>
+              <div class="place-info">
+                <span class="rating">⭐ 4.7</span>
+                <span class="distance">3.1 mi</span>
+              </div>
+            </div>
+            <div class="place-card">
+              <h4>Example Coffee</h4>
+              <p class="place-address">789 Halfway Rd</p>
+              <div class="place-info">
+                <span class="rating">⭐ 4.2</span>
+                <span class="distance">2.8 mi</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Map and weather -->
+      <section class="map-section">
+        <!-- weather -->
+        <div class="weather-widget">
+          <div class="weather-info">
+            <span class="temp">72°F</span>
+            <span class="condition">☀️ Sunny</span>
+          </div>
+          <p class="weather-location">Midpoint Area</p>
+        </div>
+
+        <!-- map placeholder -->
+        <div class="map-container">
+          <div id="map">
+            <!-- will replace with the map -->
+            <div class="map-placeholder">
+              <p>🗺️ Map will appear here</p>
+              <small>Showing midpoint and suggested venues</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- travel info -->
+        <div class="travel-info">
+          <div class="route-card">
+            <h4>Your Route</h4>
+            <p class="eta">⏱️ Estimated: 15 min</p>
+          </div>
+          <div class="route-card">
+            <h4>Person B's Route</h4>
+            <p class="eta">⏱️ Estimated: 18 min</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+
+</html>

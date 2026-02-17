@@ -98,16 +98,8 @@
           <p class="weather-location">Midpoint Area</p>
         </div>
 
-        <!-- map placeholder -->
-        <div class="map-container">
-          <div id="map">
-            <!-- will replace with the map -->
-            <div class="map-placeholder">
-              <p>🗺️ Map will appear here</p>
-              <small>Showing midpoint and suggested venues</small>
-            </div>
-          </div>
-        </div>
+        <!-- map goes here -->
+        <div id="map"></div>
 
         <!-- travel info -->
         <div class="travel-info">
@@ -123,6 +115,18 @@
       </section>
     </main>
   </div>
+
+  <!-- script -->
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+  <script>
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=initMap&libraries=places`;
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+  </script>
+
 </body>
 
 </html>

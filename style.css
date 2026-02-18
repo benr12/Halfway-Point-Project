@@ -1,4 +1,123 @@
+/* Reset default browser behavior so spacing and sizing are consistent */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+
+body {
+  margin: 0; /* removes default browser margin */
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: #f6f7fb;
+  color: #111;
+}
+
+/* Centers the entire app and adds padding around it */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px;
+}
+
+/* Controls spacing for the page header */
+header {
+  padding: 12px 4px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 26px;
+  line-height: 1.1;
+}
+
+/* Small subtitle under the main title */
+.tagline {
+  margin: 4px 0 0;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* Main layout: sidebar on the left, map on the right */
+main {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+/* Base card style used for sidebar, place cards, routes, and weather */
+.sidebar,
+.place-card,
+.route-card,
+.weather-widget {
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+}
+
+/* Styles for section headings inside the sidebar */
+.sidebar h2,
+.sidebar h3 {
+  margin: 10px 0 8px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+/* Adds spacing between input groups */
+.input-group {
+  margin-bottom: 10px;
+}
+
+/* Labels above text inputs */
+.input-group label {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+/* Text input styling */
+input[type="text"] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #e6e6ef;
+  font-size: 14px;
+}
+
+/* Main action button */
+.search-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background: #111;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Layout wrapper for weather, map, and route info */
+.map-section {
+  display: grid;
+  gap: 12px;
+}
+
+/* Map size and appearance */
 #map {
-  flex: 1;
-  min-height: 400px;
+  width: 100%;
+  height: calc(100vh - 150px); /* keeps the map visible without scrolling */
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+}
+
+/* Mobile layout to stack everything vertically */
+@media (max-width: 900px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+
+  #map {
+    height: 55vh;
+  }
 }

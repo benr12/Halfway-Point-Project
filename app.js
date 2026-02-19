@@ -256,7 +256,6 @@ function updateETAs(a, b, midpoint) {
   getETA(1, b);
 }
 
-
 // Updates the text that shows where the midpoint is located
 function updateMidpointLabel(midpoint) {
   const label = $(".weather-location");
@@ -267,8 +266,85 @@ function updateMidpointLabel(midpoint) {
       label.textContent = results[0].formatted_address;
     }
   });
+}
 
-  // Weather is just a placeholder for now not weather API
-  $(".temp") && ($(".temp").textContent = "—°F");
-  $(".condition") && ($(".condition").textContent = "⛅");
+async function fetchWeather(lat, lng) {
+
+  updateWeatherWidget({ loading: true });
+
+  const url =
+    `https://weather.googleapis.com/v1/currentConditions:lookup` +
+    `?key=${WEATHER_API_KEY}` +
+    `&location.latitude=${lat}` +
+    `&location.longitude=${lng}` +
+    `&unitsSystem=IMPERIAL`;
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      console.error("Weather API error:", response.status, await response.text());
+      updateWeatherWidget({ error: true });
+      return;
+    }
+
+    const data = await response.json();
+
+    const temp      = Math.round(data.temperature?.degrees ?? "--");
+    const condition = data.weatherCondition?.description?.text ?? "Unknown";
+    const humidity  = data.relativeHumidity ?? null;
+    const feelsLike = data.feelsLikeTemperature?.degrees
+      ? Math.round(data.feelsLikeTemperature.degrees)
+      : null;
+
+    updateWeatherWidget({ temp, condition, humidity, feelsLike });
+
+  } catch (err) {
+    console.error("Failed to fetch weather:", err);
+    updateWeatherWidget({ error: true });
+  }
+}
+
+
+function updateWeatherWidget({ loading, error, temp, condition, humidity, feelsLike }) {
+
+  const tempEl      = $(".weather-widget .temp");
+  const conditionEl = $(".weather-widget .condition");
+
+  if (!tempEl || !conditionEl) return;
+
+  if (loading) {
+    tempEl.textContent      = "--°F";
+    conditionEl.textContent = "⏳ Loading…";
+    return;
+  }
+
+  if (error) {
+    tempEl.textContent      = "--°F";
+    conditionEl.textContent = "⚠️ Weather unavailable";
+    return;
+  }
+
+  tempEl.textContent      = `${temp}°F`;
+  conditionEl.textContent = `${conditionEmoji(condition)} ${condition}`;
+
+
+  const extraEl = $(".weather-widget .weather-extra");
+  if (extraEl && humidity && feelsLike) {
+    extraEl.textContent = `Feels like ${feelsLike}°F · ${humidity}% humidity`;
+  }
+}
+
+
+function conditionEmoji(condition = "") {
+  const c = condition.toLowerCase();
+  if (c.includes("sun")   || c.includes("clear"))  return "☀️";
+  if (c.includes("partly"))                         return "⛅";
+  if (c.includes("cloud") || c.includes("over"))   return "☁️";
+  if (c.includes("rain")  || c.includes("shower")) return "🌧️";
+  if (c.includes("thunder")|| c.includes("storm")) return "⛈️";
+  if (c.includes("snow")  || c.includes("sleet"))  return "❄️";
+  if (c.includes("fog")   || c.includes("mist"))   return "🌫️";
+  if (c.includes("wind"))                           return "💨";
+  return "🌡️";
 }

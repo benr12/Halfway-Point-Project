@@ -137,6 +137,7 @@ function initMap() {
     updateETAs(placeA.geometry.location, placeB.geometry.location, lastMidpoint);
     updateMidpointLabel(lastMidpoint);
     searchNearby(lastMidpoint);
+    fetchWeather(midpoint.lat, midpoint.lng);
   });
 }
 
@@ -274,7 +275,7 @@ async function fetchWeather(lat, lng) {
 
   const url =
     `https://weather.googleapis.com/v1/currentConditions:lookup` +
-    `?key=${WEATHER_API_KEY}` +
+    `?key=${Weather_API_KEY}` + // 🔥 FIX: Changed WEATHER_API_KEY to Weather_API_KEY (matches index.html)
     `&location.latitude=${lat}` +
     `&location.longitude=${lng}` +
     `&unitsSystem=IMPERIAL`;
